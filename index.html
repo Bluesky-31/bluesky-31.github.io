@@ -9,42 +9,67 @@
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 :root{--accent:#ff6b00;--safe:#00ff88;--warn:#ff9900;--danger:#ff2a2a;--text:#e8e0cc;}
 html,body{width:100%;height:100%;overflow:hidden;background:#0d0d0d;font-family:'Share Tech Mono',monospace;color:var(--text);touch-action:none;}
- 
+
+/* ── SETTINGS SCREEN ── */
+#settings{position:fixed;inset:0;background:#0d0d0d;display:flex;flex-direction:column;align-items:center;z-index:150;padding:28px 20px 24px;overflow-y:auto;}
+#settings.hidden{display:none;}
+#settings-title{font-family:'Black Ops One',cursive;font-size:1.6rem;letter-spacing:4px;color:var(--accent);margin-bottom:24px;}
+.set-section{width:100%;max-width:340px;margin-bottom:22px;}
+.set-section-label{font-size:.55rem;letter-spacing:3px;color:#aaa;text-transform:uppercase;margin-bottom:10px;border-bottom:1px solid #1a1a1a;padding-bottom:4px;}
+.set-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.set-row-label{font-size:.8rem;color:#ddd;}
+/* Toggle */
+.toggle{position:relative;width:44px;height:24px;flex-shrink:0;}
+.toggle input{opacity:0;width:0;height:0;position:absolute;}
+.toggle-track{position:absolute;inset:0;background:#222;border-radius:12px;transition:background .2s;cursor:pointer;}
+.toggle input:checked+.toggle-track{background:var(--accent);}
+.toggle-track::after{content:'';position:absolute;width:18px;height:18px;background:#fff;border-radius:50%;top:3px;left:3px;transition:transform .2s;}
+.toggle input:checked+.toggle-track::after{transform:translateX(20px);}
+/* Colour swatches */
+.swatch-row{display:flex;gap:8px;flex-wrap:wrap;}
+.swatch{width:34px;height:34px;border-radius:6px;border:2px solid transparent;cursor:pointer;touch-action:manipulation;transition:border-color .15s;}
+.swatch.active{border-color:#fff;}
+/* Cue colour dots */
+.cue-swatch{width:34px;height:14px;border-radius:4px;border:2px solid transparent;cursor:pointer;touch-action:manipulation;}
+.cue-swatch.active{border-color:#fff;}
+/* Buttons */
+#settings-done{font-family:'Black Ops One',cursive;font-size:1rem;letter-spacing:3px;padding:14px 40px;background:var(--accent);border:none;border-radius:8px;color:#000;cursor:pointer;touch-action:manipulation;margin-top:4px;}
+
 /* ── HOME SCREEN ── */
 #home{position:fixed;inset:0;background:#0d0d0d;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;z-index:100;padding:20px;}
 #home.hidden{display:none;}
 #home-title{font-family:'Black Ops One',cursive;font-size:2.4rem;letter-spacing:5px;color:var(--accent);text-shadow:0 0 24px rgba(255,107,0,.6);text-align:center;line-height:1.1;margin-bottom:6px;}
-#home-sub{font-size:.65rem;letter-spacing:3px;color:#555;text-transform:uppercase;margin-bottom:32px;}
-.diff-label{font-size:.55rem;letter-spacing:3px;color:#666;text-transform:uppercase;margin-bottom:10px;text-align:center;}
+#home-sub{font-size:.7rem;letter-spacing:3px;color:#bbb;text-transform:uppercase;margin-bottom:32px;}
+.diff-label{font-size:.6rem;letter-spacing:3px;color:#ccc;text-transform:uppercase;margin-bottom:10px;text-align:center;}
 .diff-btns{display:flex;gap:10px;margin-bottom:32px;}
-.diff-btn{font-family:'Black Ops One',cursive;font-size:.85rem;letter-spacing:2px;padding:12px 22px;border:2px solid #333;border-radius:6px;background:transparent;color:#666;cursor:pointer;touch-action:manipulation;transition:all .15s;}
+.diff-btn{font-family:'Black Ops One',cursive;font-size:.85rem;letter-spacing:2px;padding:12px 22px;border:2px solid #555;border-radius:6px;background:transparent;color:#bbb;cursor:pointer;touch-action:manipulation;transition:all .15s;}
 .diff-btn.active{border-color:var(--accent);color:var(--accent);background:rgba(255,107,0,.1);}
-#home-desc{font-size:.6rem;color:#444;letter-spacing:1px;text-align:center;margin-bottom:28px;line-height:1.7;min-height:40px;}
+#home-desc{font-size:.68rem;color:#bbb;letter-spacing:1px;text-align:center;margin-bottom:28px;line-height:1.7;min-height:40px;}
 #home-start{font-family:'Black Ops One',cursive;font-size:1.2rem;letter-spacing:4px;padding:16px 48px;background:var(--accent);border:none;border-radius:8px;color:#000;cursor:pointer;touch-action:manipulation;}
 #home-start:active{background:#cc5500;}
- 
+
 /* ── APP SHELL ── */
 #app{display:flex;flex-direction:column;width:100vw;height:100dvh;}
 #topbar{display:flex;align-items:center;justify-content:space-between;padding:6px 12px;background:#111;border-bottom:1px solid #222;flex-shrink:0;}
 #topbar h1{font-family:'Black Ops One',cursive;font-size:.9rem;letter-spacing:3px;color:var(--accent);text-shadow:0 0 10px rgba(255,107,0,.5);}
 .stats{display:flex;gap:12px;align-items:center;}
 .stat{display:flex;flex-direction:column;align-items:center;}
-.stat-label{font-size:.4rem;letter-spacing:2px;color:#555;text-transform:uppercase;}
-.stat-value{font-size:.8rem;}
-#btn-home{font-family:'Share Tech Mono',monospace;font-size:.55rem;letter-spacing:1px;padding:4px 8px;background:transparent;border:1px solid #333;border-radius:3px;color:#555;cursor:pointer;touch-action:manipulation;}
+.stat-label{font-size:.45rem;letter-spacing:2px;color:#aaa;text-transform:uppercase;}
+.stat-value{font-size:.85rem;color:#f0e8d8;}
+#btn-home{font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:1px;padding:4px 8px;background:transparent;border:1px solid #666;border-radius:3px;color:#ccc;cursor:pointer;touch-action:manipulation;}
 #btn-home:active{border-color:var(--accent);color:var(--accent);}
- 
+
 /* ── CANVAS ── */
 #canvas-wrap{position:relative;flex:1;min-height:0;overflow:hidden;background:#0d0d0d;}
 #game{display:block;width:100%;height:100%;}
- 
+
 /* ── CONTROLS ── */
 #controls{background:#111;border-top:1px solid #222;padding:8px 10px 10px;flex-shrink:0;display:flex;flex-direction:column;gap:6px;}
 .ctrl-row{display:flex;align-items:center;gap:8px;}
 #spin-wrap{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:2px;}
 #spin-canvas{display:block;border-radius:50%;touch-action:none;}
 #power-wrap{flex:1;display:flex;flex-direction:column;gap:3px;min-width:0;}
-.ctrl-label{font-size:.5rem;letter-spacing:2px;color:#555;text-transform:uppercase;}
+.ctrl-label{font-size:.55rem;letter-spacing:2px;color:#bbb;text-transform:uppercase;}
 #power-row{display:flex;justify-content:space-between;align-items:baseline;}
 #power-pct{font-size:.72rem;color:var(--accent);}
 /* power-track: pointer-events handled in JS, stopPropagation prevents aim */
@@ -53,44 +78,44 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0d0d0d;font-family:
 #pslider{width:100%;margin-top:3px;accent-color:var(--accent);touch-action:none;}
 #fire-btn{background:var(--accent);border:none;border-radius:6px;color:#000;font-family:'Black Ops One',cursive;font-size:.95rem;letter-spacing:2px;padding:0 16px;height:52px;cursor:pointer;touch-action:manipulation;flex-shrink:0;white-space:nowrap;}
 #fire-btn:active{background:#cc5500;}
- 
+
 #bomb-strip{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;}
 #bomb-strip::-webkit-scrollbar{display:none;}
-.bomb-chip{display:flex;align-items:center;gap:4px;background:#1a1a1a;border-radius:20px;padding:3px 8px;flex-shrink:0;font-size:.62rem;}
+.bomb-chip{display:flex;align-items:center;gap:4px;background:#222;border-radius:20px;padding:3px 8px;flex-shrink:0;font-size:.65rem;color:#ddd;}
 .bomb-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
 .t-safe{color:var(--safe);}.t-warn{color:var(--warn);}.t-danger{color:var(--danger);animation:blink .4s infinite;}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
- 
+
 /* ── RANKINGS SCREEN ── */
 #rankings{position:fixed;inset:0;background:#0d0d0d;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:32px 20px 24px;z-index:200;overflow-y:auto;}
 #rankings.hidden{display:none;}
 #rankings-title{font-family:'Black Ops One',cursive;font-size:2rem;letter-spacing:5px;color:var(--accent);text-shadow:0 0 20px rgba(255,107,0,.5);margin-bottom:4px;}
-#rankings-sub{font-size:.6rem;letter-spacing:3px;color:#555;text-transform:uppercase;margin-bottom:24px;}
+#rankings-sub{font-size:.65rem;letter-spacing:3px;color:#bbb;text-transform:uppercase;margin-bottom:24px;}
 #rankings-final{font-family:'Black Ops One',cursive;font-size:1.4rem;color:#e8e0cc;margin-bottom:6px;}
-#rankings-diff{font-size:.6rem;letter-spacing:2px;color:#555;margin-bottom:28px;}
+#rankings-diff{font-size:.65rem;letter-spacing:2px;color:#ccc;margin-bottom:28px;}
 #rankings-table{width:100%;max-width:340px;border-collapse:collapse;margin-bottom:28px;}
-#rankings-table th{font-size:.5rem;letter-spacing:3px;color:#444;text-transform:uppercase;padding:4px 8px;text-align:left;border-bottom:1px solid #1a1a1a;}
-#rankings-table td{font-size:.75rem;padding:8px 8px;border-bottom:1px solid #111;color:#888;}
+#rankings-table th{font-size:.55rem;letter-spacing:3px;color:#bbb;text-transform:uppercase;padding:4px 8px;text-align:left;border-bottom:1px solid #1a1a1a;}
+#rankings-table td{font-size:.78rem;padding:8px 8px;border-bottom:1px solid #222;color:#ccc;}
 #rankings-table tr.you td{color:#e8e0cc;}
 #rankings-table tr.you td:first-child{color:var(--accent);}
 .rank-medal{font-size:1rem;}
 #rankings-btns{display:flex;gap:12px;}
 .rank-btn{font-family:'Black Ops One',cursive;font-size:.9rem;letter-spacing:2px;padding:12px 28px;border:none;border-radius:6px;cursor:pointer;touch-action:manipulation;}
 #rank-play-again{background:var(--accent);color:#000;}
-#rank-menu{background:transparent;border:1px solid #333;color:#666;}
+#rank-menu{background:transparent;border:1px solid #666;color:#ccc;}
 #rank-menu:active{border-color:var(--accent);color:var(--accent);}
- 
+
 /* ── OVERLAY (win/lose) ── */
 #overlay{position:absolute;inset:0;background:rgba(0,0,0,.88);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;z-index:20;}
 #overlay.hidden{display:none;}
 #ov-title{font-family:'Black Ops One',cursive;font-size:1.8rem;letter-spacing:4px;text-align:center;}
-#ov-sub{font-size:.72rem;letter-spacing:1px;color:#888;text-align:center;padding:0 20px;line-height:1.6;}
+#ov-sub{font-size:.78rem;letter-spacing:1px;color:#ddd;text-align:center;padding:0 20px;line-height:1.6;}
 .ov-btns{display:flex;gap:10px;}
 .ov-btn{background:var(--accent);border:none;border-radius:6px;color:#000;font-family:'Black Ops One',cursive;font-size:.9rem;letter-spacing:2px;padding:12px 22px;cursor:pointer;touch-action:manipulation;}
-.ov-btn.secondary{background:transparent;border:1px solid #444;color:#888;}
+.ov-btn.secondary{background:transparent;border:1px solid #888;color:#ddd;}
 .ov-btn.secondary:active{border-color:var(--accent);color:var(--accent);}
 #combo-pop{position:absolute;pointer-events:none;font-family:'Black Ops One',cursive;font-size:1.1rem;color:var(--accent);text-shadow:0 0 8px var(--accent);opacity:0;z-index:10;transition:opacity .6s,transform .6s;}
- 
+
 /* ── LANDSCAPE ── */
 @media(orientation:landscape){
   #app{flex-direction:row;flex-wrap:wrap;}
@@ -106,7 +131,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0d0d0d;font-family:
 </style>
 </head>
 <body>
- 
+
 <!-- HOME SCREEN -->
 <div id="home">
   <div id="home-title">BLAST<br>BILLIARDS</div>
@@ -118,9 +143,62 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0d0d0d;font-family:
     <button class="diff-btn" id="d-hard"  onclick="selectDiff('hard')">HARD</button>
   </div>
   <div id="home-desc">Normal speed. Standard ball count per level.</div>
-  <button id="home-start" onclick="launchGame()">LIGHT FUSE</button>
+  <div style="display:flex;gap:12px;margin-top:4px;">
+    <button id="home-start" onclick="launchGame()">LIGHT FUSE</button>
+    <button onclick="openSettings()" style="font-family:'Black Ops One',cursive;font-size:.9rem;letter-spacing:2px;padding:14px 22px;background:transparent;border:2px solid #333;border-radius:8px;color:#666;cursor:pointer;touch-action:manipulation;">⚙ SETTINGS</button>
+  </div>
 </div>
- 
+
+<!-- SETTINGS -->
+<div id="settings" class="hidden">
+  <div id="settings-title">⚙ SETTINGS</div>
+
+  <div class="set-section">
+    <div class="set-section-label">Gameplay</div>
+    <div class="set-row">
+      <span class="set-row-label">Show Timer</span>
+      <label class="toggle"><input type="checkbox" id="set-timer" checked onchange="saveSetting('timer',this.checked)"><div class="toggle-track"></div></label>
+    </div>
+  </div>
+
+  <div class="set-section">
+    <div class="set-section-label">Table Cloth Colour</div>
+    <div class="swatch-row" id="felt-swatches">
+      <div class="swatch active" data-felt="green"  style="background:linear-gradient(135deg,#236b3a,#143d22)" onclick="setFelt('green')"></div>
+      <div class="swatch"        data-felt="blue"   style="background:linear-gradient(135deg,#1a3d6b,#0d2040)" onclick="setFelt('blue')"></div>
+      <div class="swatch"        data-felt="black"  style="background:linear-gradient(135deg,#1a1a1a,#0a0a0a)" onclick="setFelt('black')"></div>
+      <div class="swatch"        data-felt="pink"   style="background:linear-gradient(135deg,#8b2252,#5a1435)" onclick="setFelt('pink')"></div>
+      <div class="swatch"        data-felt="red"    style="background:linear-gradient(135deg,#7a1a1a,#4a0e0e)" onclick="setFelt('red')"></div>
+    </div>
+  </div>
+
+  <div class="set-section">
+    <div class="set-section-label">Cue Stick Colour</div>
+    <div class="swatch-row" id="cue-swatches">
+      <div class="cue-swatch active" data-cue="classic" style="background:linear-gradient(90deg,#f5d06e,#5c3317)" onclick="setCue('classic')"></div>
+      <div class="cue-swatch"        data-cue="white"   style="background:linear-gradient(90deg,#f0f0f0,#888)"   onclick="setCue('white')"></div>
+      <div class="cue-swatch"        data-cue="black"   style="background:linear-gradient(90deg,#555,#111)"       onclick="setCue('black')"></div>
+      <div class="cue-swatch"        data-cue="blue"    style="background:linear-gradient(90deg,#6ab0f5,#1a3d6b)" onclick="setCue('blue')"></div>
+      <div class="cue-swatch"        data-cue="red"     style="background:linear-gradient(90deg,#f56a6a,#7a1a1a)" onclick="setCue('red')"></div>
+      <div class="cue-swatch"        data-cue="gold"    style="background:linear-gradient(90deg,#ffd700,#b8860b)" onclick="setCue('gold')"></div>
+    </div>
+  </div>
+
+  <div class="set-section">
+    <div class="set-section-label">Cue Stick Design</div>
+    <div class="set-row">
+      <span class="set-row-label">Floral Pattern</span>
+      <label class="toggle"><input type="checkbox" id="set-flowers" onchange="onDesignToggle('flowers',this.checked)"><div class="toggle-track"></div></label>
+    </div>
+    <div class="set-row">
+      <span class="set-row-label">Skull Pattern</span>
+      <label class="toggle"><input type="checkbox" id="set-skulls" onchange="onDesignToggle('skulls',this.checked)"><div class="toggle-track"></div></label>
+    </div>
+  </div>
+
+  <button id="settings-done" onclick="closeSettings()">DONE</button>
+</div>
+
 <!-- RANKINGS -->
 <div id="rankings" class="hidden">
   <div id="rankings-title">GAME OVER</div>
@@ -136,7 +214,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0d0d0d;font-family:
     <button class="rank-btn" id="rank-menu" onclick="rankGoHome()">MENU</button>
   </div>
 </div>
- 
+
 <!-- GAME -->
 <div id="app">
   <div id="topbar">
@@ -177,7 +255,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0d0d0d;font-family:
     <div id="bomb-strip"></div>
   </div>
 </div>
- 
+
 <script>
 // ── Difficulty ────────────────────────────────────────────────────────────
 const DIFF_DESCS = {
@@ -186,36 +264,106 @@ const DIFF_DESCS = {
   hard:   'Same time but 20% more balls per level. Good luck.'
 };
 const DIFF_LABELS = { easy:'EZ', normal:'NRM', hard:'HRD' };
- 
+
+// ── Settings state ─────────────────────────────────────────────────────────
+const FELT_COLORS = {
+  green: { c0:'#236b3a', c1:'#1b5430', c2:'#143d22' },
+  blue:  { c0:'#1e4d8c', c1:'#163a6b', c2:'#0d2445' },
+  black: { c0:'#2a2a2a', c1:'#1a1a1a', c2:'#0d0d0d' },
+  pink:  { c0:'#9b2d60', c1:'#7a2050', c2:'#5a1438' },
+  red:   { c0:'#8b2020', c1:'#6b1818', c2:'#4a0e0e' },
+};
+const CUE_COLORS = {
+  classic: { tip:'#f5d06e', mid:'#c8a84b', butt:'#5c3317' },
+  white:   { tip:'#f0f0f0', mid:'#cccccc', butt:'#888888' },
+  black:   { tip:'#666666', mid:'#333333', butt:'#111111' },
+  blue:    { tip:'#8ac8f8', mid:'#4a8acc', butt:'#1a3d6b' },
+  red:     { tip:'#f88888', mid:'#cc4a4a', butt:'#7a1a1a' },
+  gold:    { tip:'#ffd700', mid:'#daa520', butt:'#8b6914' },
+};
+let settings = {
+  timer: true,
+  felt: 'green',
+  cue: 'classic',
+  flowers: false,
+  skulls: false,
+};
+try {
+  const saved = JSON.parse(localStorage.getItem('bb_settings')||'{}');
+  Object.assign(settings, saved);
+} catch(e){}
+
+function saveSetting(key, val) {
+  settings[key] = val;
+  try { localStorage.setItem('bb_settings', JSON.stringify(settings)); } catch(e){}
+}
+function onDesignToggle(key, val) {
+  // Skulls and flowers are mutually exclusive
+  if (val) {
+    if (key === 'flowers') { settings.skulls = false; document.getElementById('set-skulls').checked = false; }
+    if (key === 'skulls')  { settings.flowers = false; document.getElementById('set-flowers').checked = false; }
+  }
+  saveSetting(key, val);
+}
+
+function openSettings() {
+  // Sync UI to current settings
+  document.getElementById('set-timer').checked   = settings.timer;
+  document.getElementById('set-flowers').checked = settings.flowers;
+  document.getElementById('set-skulls').checked  = settings.skulls;
+  document.querySelectorAll('[data-felt]').forEach(el =>
+    el.classList.toggle('active', el.dataset.felt === settings.felt));
+  document.querySelectorAll('[data-cue]').forEach(el =>
+    el.classList.toggle('active', el.dataset.cue === settings.cue));
+  document.getElementById('home').classList.add('hidden');
+  document.getElementById('settings').classList.remove('hidden');
+}
+function closeSettings() {
+  document.getElementById('settings').classList.add('hidden');
+  document.getElementById('home').classList.remove('hidden');
+}
+function setFelt(name) {
+  settings.felt = name;
+  saveSetting('felt', name);
+  document.querySelectorAll('[data-felt]').forEach(el =>
+    el.classList.toggle('active', el.dataset.felt === name));
+}
+function setCue(name) {
+  settings.cue = name;
+  saveSetting('cue', name);
+  document.querySelectorAll('[data-cue]').forEach(el =>
+    el.classList.toggle('active', el.dataset.cue === name));
+}
+
 let difficulty = 'normal';
- 
+
 function selectDiff(d) {
   difficulty = d;
   document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('d-'+d).classList.add('active');
   document.getElementById('home-desc').textContent = DIFF_DESCS[d];
 }
- 
+
 function launchGame() {
   document.getElementById('home').classList.add('hidden');
   document.getElementById('s-diff').textContent = DIFF_LABELS[difficulty];
   G.score = 0; G.level = 1;
   startLevel();
 }
- 
+
 function goHome() {
   document.getElementById('overlay').classList.add('hidden');
   document.getElementById('home').classList.remove('hidden');
   G.phase = 'idle';
   G.cue = null; G.balls = [];
 }
- 
+
 // ── Level data formula ────────────────────────────────────────────────────
 // Easy:   starts 3 balls/60s, +1 ball +10s per level, cap level 10 (12 balls/150s)
 // Normal: starts 4 balls/60s, +1 ball +9s  per level, cap level 10 (13 balls/141s)
 // Hard:   starts 5 balls/60s, +1 ball +8s  per level, cap level 10 (14 balls/132s)
 const MAX_LEVEL = 10;
- 
+
 function getLevelData(lvl) {
   const capped = Math.min(lvl, MAX_LEVEL) - 1; // 0-indexed offset
   let n, t;
@@ -233,10 +381,10 @@ function getLevelData(lvl) {
   const hasBombs = true;
   return { n, t, hasBombs };
 }
- 
+
 // ── Table geometry ─────────────────────────────────────────────────────────
 let T = {};
- 
+
 function buildTable() {
   const W = canvas.width, H = canvas.height;
   const RAIL = 14, WOOD = 8;
@@ -275,13 +423,13 @@ function buildTable() {
     ];
   }
 }
- 
+
 const canvas = document.getElementById('game');
 const ctx    = canvas.getContext('2d');
 const spinCv = document.getElementById('spin-canvas');
 const sCtx   = spinCv.getContext('2d');
 const wrap   = document.getElementById('canvas-wrap');
- 
+
 function resizeCanvas() {
   // Use offsetWidth/Height to get the actual rendered pixel size
   canvas.width  = wrap.offsetWidth;
@@ -289,13 +437,13 @@ function resizeCanvas() {
   buildTable();
 }
 window.addEventListener('resize', resizeCanvas);
- 
+
 // ── Game state ─────────────────────────────────────────────────────────────
 const BCOLORS = ['#e74c3c','#e67e22','#f1c40f','#2ecc71','#3498db','#9b59b6','#1abc9c','#e91e63','#ff6b00','#00bcd4'];
 const BALL_R   = 13;
 const FRICTION = 0.978;
 const MIN_SPD  = 0.08;
- 
+
 let G = {
   balls:[], cue:null, phase:'idle',
   aimAngle:Math.PI, power:60,
@@ -303,18 +451,18 @@ let G = {
   score:0, level:1, combo:0,
   particles:[], shake:0,
 };
- 
+
 // ── Ball placement: varied per level ──────────────────────────────────────
 // We use a seeded-ish placement strategy: cluster, spread, diagonal, triangle etc.
 function placeBalls(n, lvl, hasBombs) {
   const balls = [];
   // Cue ball reference
   const cueX = G.cue.x, cueY = G.cue.y;
- 
+
   // Pattern varies by level
   const pattern = ((lvl - 1) % 6);
   const candidates = generateCandidates(n, pattern, cueX, cueY);
- 
+
   for (let i = 0; i < candidates.length && balls.length < n; i++) {
     const {x,y} = candidates[i];
     if (Math.hypot(x-cueX, y-cueY) < 65) continue;
@@ -324,7 +472,7 @@ function placeBalls(n, lvl, hasBombs) {
     if (y < T.top+BALL_R*2  || y > T.bottom-BALL_R*2) continue;
     balls.push({x,y});
   }
- 
+
   // Fallback: random for any remaining
   let safety = 0;
   while (balls.length < n && safety++ < 600) {
@@ -337,12 +485,12 @@ function placeBalls(n, lvl, hasBombs) {
   }
   return balls;
 }
- 
+
 function generateCandidates(n, pattern, cueX, cueY) {
   const pts = [];
   const cx = (T.ix+T.right)/2, cy = (T.iy+T.bottom)/2;
   const hw = T.iw/2 - BALL_R*3, hh = T.ih/2 - BALL_R*3;
- 
+
   if (pattern === 0) {
     // Triangle rack (portrait: vertical, landscape: horizontal)
     const spacing = BALL_R*2.4;
@@ -406,20 +554,20 @@ function generateCandidates(n, pattern, cueX, cueY) {
   for (let i=pts.length-1;i>0;i--) { const j=Math.floor(Math.random()*(i+1)); [pts[i],pts[j]]=[pts[j],pts[i]]; }
   return pts;
 }
- 
+
 // ── Start level ────────────────────────────────────────────────────────────
 function startLevel() {
   document.getElementById('overlay').classList.add('hidden');
   resizeCanvas();
   const lvl  = getLevelData(G.level);
   G.balls=[]; G.particles=[]; G.combo=0;
- 
+
   G.cue = T.isPortrait
     ? {x:T.ix+Math.round(T.iw/2),   y:T.iy+Math.round(T.ih*0.75), vx:0,vy:0,r:BALL_R}
     : {x:T.ix+Math.round(T.iw*0.25),y:T.iy+Math.round(T.ih/2),    vx:0,vy:0,r:BALL_R};
- 
+
   const positions = placeBalls(lvl.n, G.level, lvl.hasBombs);
- 
+
   positions.forEach((pos,i) => {
     const isBomb = lvl.hasBombs; // all balls are bombs from level 3
     const tv = lvl.t + (Math.random()-0.5)*4;
@@ -432,36 +580,36 @@ function startLevel() {
       ph:Math.random()*Math.PI*2
     });
   });
- 
+
   G.phase='aiming';
   refreshStrip();
 }
- 
+
 // Alias for overlay button
 function nextLevel() { startLevel(); }
- 
+
 // ── Touch: prevent controls area from triggering aim ──────────────────────
 // We mark the controls element so document touchstart can check target.
 const controlsEl = document.getElementById('controls');
 const powerTrackEl = document.getElementById('power-track');
 const psliderEl    = document.getElementById('pslider');
- 
+
 function isTouchInControls(t) {
   // Check if the touch target is inside the controls panel
   const el = document.elementFromPoint(t.clientX, t.clientY);
   return el && controlsEl.contains(el);
 }
- 
+
 // ── Aim control ────────────────────────────────────────────────────────────
 // Uses incremental (delta) tracking so the cue angle accumulates across
 // multiple touch gestures. Lifting and re-placing a finger never resets
 // the angle — it always continues from wherever it was left.
- 
+
 let aimTouchId   = null;  // identifier of the active tracking touch
 let aimLastX     = 0;     // last known clientX for the active touch
 let aimLastY     = 0;     // last known clientY for the active touch
 const SENSITIVITY = 0.010; // radians per pixel of horizontal drag
- 
+
 document.addEventListener('touchstart', e => {
   if (G.phase !== 'aiming' || !G.cue || spinDn) return;
   if (aimTouchId !== null) return;          // already tracking a finger
@@ -472,7 +620,7 @@ document.addEventListener('touchstart', e => {
   aimLastX   = t.clientX;
   aimLastY   = t.clientY;
 }, {passive:true});
- 
+
 document.addEventListener('touchmove', e => {
   if (aimTouchId === null) return;
   for (let i=0; i<e.changedTouches.length; i++) {
@@ -489,7 +637,7 @@ document.addEventListener('touchmove', e => {
     break;
   }
 }, {passive:true});
- 
+
 document.addEventListener('touchend', e => {
   for (let i=0; i<e.changedTouches.length; i++) {
     if (e.changedTouches[i].identifier === aimTouchId) {
@@ -498,7 +646,7 @@ document.addEventListener('touchend', e => {
     }
   }
 }, {passive:true});
- 
+
 document.addEventListener('touchcancel', e => {
   for (let i=0; i<e.changedTouches.length; i++) {
     if (e.changedTouches[i].identifier === aimTouchId) {
@@ -507,7 +655,7 @@ document.addEventListener('touchcancel', e => {
     }
   }
 }, {passive:true});
- 
+
 // Mouse (desktop) — also incremental so behaviour matches touch
 let mouseAiming = false;
 let mouseLast = {x:0, y:0};
@@ -525,7 +673,7 @@ canvas.addEventListener('mousemove', e => {
 });
 canvas.addEventListener('mouseup', () => { mouseAiming = false; });
 canvas.addEventListener('mouseleave', () => { mouseAiming = false; });
- 
+
 // ── Spin pad ───────────────────────────────────────────────────────────────
 let spinDn = false;
 spinCv.addEventListener('touchstart',e=>{e.stopPropagation();e.preventDefault();spinDn=true;doSpin(e);},{passive:false});
@@ -543,7 +691,7 @@ function doSpin(e) {
   if(d>rad){dx=dx/d*rad;dy=dy/d*rad;}
   G.spinX=dx/rad; G.spinY=dy/rad;
 }
- 
+
 // ── Power slider — stopPropagation so it never triggers aim ───────────────
 let powerDrag = false;
 powerTrackEl.addEventListener('touchstart', e=>{
@@ -553,28 +701,28 @@ powerTrackEl.addEventListener('touchmove', e=>{
   e.stopPropagation(); if(powerDrag) applyPowerTouch(e);
 },{passive:false});
 powerTrackEl.addEventListener('touchend',  e=>{ e.stopPropagation(); powerDrag=false; },{passive:false});
- 
+
 function applyPowerTouch(e) {
   const t = e.touches[0];
   const r = powerTrackEl.getBoundingClientRect();
   const ratio = Math.max(0, Math.min(1, (t.clientX-r.left)/r.width));
   setPower(Math.round(10 + ratio*90));
 }
- 
+
 psliderEl.addEventListener('touchstart', e=>e.stopPropagation(), {passive:false});
 psliderEl.addEventListener('touchmove',  e=>e.stopPropagation(), {passive:false});
 psliderEl.addEventListener('input', function(){ setPower(+this.value); });
- 
+
 function setPower(v) {
   G.power=v;
   document.getElementById('power-fill').style.width=v+'%';
   document.getElementById('power-pct').textContent=v+'%';
   psliderEl.value=v;
 }
- 
+
 // Fire button — stopPropagation
 document.getElementById('fire-btn').addEventListener('touchstart', e=>e.stopPropagation(), {passive:false});
- 
+
 // ── Shoot ──────────────────────────────────────────────────────────────────
 function shoot() {
   if(G.phase!=='aiming'||!G.cue) return;
@@ -583,7 +731,7 @@ function shoot() {
   G.cue.vy=Math.sin(G.aimAngle)*spd + G.spinY*1.4;
   G.phase='rolling'; G.combo=0;
 }
- 
+
 // ── Ray cast ───────────────────────────────────────────────────────────────
 function castRay(ox,oy,dx,dy,r) {
   let minT=1200, res={x:ox+dx*minT,y:oy+dy*minT,type:'wall',ball:null};
@@ -606,7 +754,7 @@ function castRay(ox,oy,dx,dy,r) {
   }
   return res;
 }
- 
+
 // ── Physics ────────────────────────────────────────────────────────────────
 function moveBall(ball,isCue) {
   ball.x+=ball.vx; ball.y+=ball.vy;
@@ -631,7 +779,7 @@ function moveBall(ball,isCue) {
     }
   }
 }
- 
+
 function resolveBB(a,b) {
   const dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy);
   if(d===0||d>=a.r+b.r) return;
@@ -641,7 +789,7 @@ function resolveBB(a,b) {
   const dvn=(a.vx-b.vx)*nx+(a.vy-b.vy)*ny;
   if(dvn>0){a.vx-=dvn*nx;a.vy-=dvn*ny;b.vx+=dvn*nx;b.vy+=dvn*ny;}
 }
- 
+
 function physics() {
   if(G.phase!=='rolling') return;
   moveBall(G.cue,true);
@@ -649,7 +797,7 @@ function physics() {
   for(const b of active) moveBall(b,false);
   for(const b of active) resolveBB(G.cue,b);
   for(let i=0;i<active.length;i++) for(let j=i+1;j<active.length;j++) resolveBB(active[i],active[j]);
- 
+
   const cs=Math.hypot(G.cue.vx,G.cue.vy);
   // Allow aiming once everything is slow enough — zero ALL velocities immediately
   // so no residual motion carries into the next shot.
@@ -662,7 +810,7 @@ function physics() {
     checkEnd();
   }
 }
- 
+
 // ── Timers ─────────────────────────────────────────────────────────────────
 function tickTimers(dt) {
   if(G.phase!=='aiming'&&G.phase!=='rolling') return;
@@ -674,7 +822,7 @@ function tickTimers(dt) {
   }
   refreshStrip();
 }
- 
+
 function explodeBall(b) {
   b.exploded=true; G.shake=0.5;
   for(let i=0;i<20;i++){
@@ -683,7 +831,7 @@ function explodeBall(b) {
   }
   setTimeout(checkEnd,100);
 }
- 
+
 function checkEnd() {
   if(G.balls.some(b=>b.exploded)){
     showRankings(false); return;
@@ -699,7 +847,7 @@ function checkEnd() {
     }
   }
 }
- 
+
 function showOver(title,sub,lose) {
   G.phase='idle';
   const el=document.getElementById('ov-title');
@@ -709,7 +857,7 @@ function showOver(title,sub,lose) {
   nextBtn.textContent='NEXT LEVEL';
   document.getElementById('overlay').classList.remove('hidden');
 }
- 
+
 // ── Rankings / leaderboard ────────────────────────────────────────────────
 // Persist top scores in localStorage
 function getScores() {
@@ -722,24 +870,24 @@ function saveScore(entry) {
   try { localStorage.setItem('bb_scores', JSON.stringify(scores.slice(0,10))); } catch(e){}
   return scores;
 }
- 
+
 function showRankings(champion) {
   G.phase='idle';
   const entry = { score:G.score, level:G.level, diff:difficulty, name:'YOU', date:new Date().toLocaleDateString() };
   const allScores = saveScore(entry);
- 
+
   // Find where this run sits
   const myIdx = allScores.findIndex(s=>s===allScores.find(s2=>s2.score===G.score&&s2.diff===difficulty&&s2.name==='YOU'));
- 
+
   // Update title
   const titleEl = document.getElementById('rankings-title');
   if(champion){ titleEl.textContent='CHAMPION!'; titleEl.style.color='#00e676'; }
   else        { titleEl.textContent='GAME OVER'; titleEl.style.color='#ff2a2a'; }
- 
+
   document.getElementById('rankings-final').textContent = G.score.toLocaleString()+' pts';
   document.getElementById('rankings-diff').textContent =
     'Level '+G.level+' • '+({easy:'Easy',normal:'Normal',hard:'Hard'}[difficulty]||'Normal');
- 
+
   const medals = ['🥇','🥈','🥉'];
   const tbody = document.getElementById('rankings-body');
   tbody.innerHTML='';
@@ -754,11 +902,11 @@ function showRankings(champion) {
       '<td>'+(s.score||0).toLocaleString()+'</td>';
     tbody.appendChild(tr);
   });
- 
+
   document.getElementById('overlay').classList.add('hidden');
   document.getElementById('rankings').classList.remove('hidden');
 }
- 
+
 function rankPlayAgain() {
   document.getElementById('rankings').classList.add('hidden');
   G.score=0; G.level=1;
@@ -770,7 +918,7 @@ function rankGoHome() {
   document.getElementById('home').classList.remove('hidden');
   G.phase='idle'; G.cue=null; G.balls=[];
 }
- 
+
 function showCombo(x,y,combo,pts) {
   const el=document.getElementById('combo-pop');
   el.style.left=x+'px'; el.style.top=(y-24)+'px';
@@ -779,7 +927,7 @@ function showCombo(x,y,combo,pts) {
   el.style.opacity=1; el.style.transform='translateY(0)'; el.style.transition='none';
   setTimeout(()=>{el.style.transition='opacity .7s,transform .7s';el.style.opacity=0;el.style.transform='translateY(-30px)';},40);
 }
- 
+
 function tickParticles(dt) {
   for(let i=G.particles.length-1;i>=0;i--){
     const p=G.particles[i];
@@ -787,12 +935,12 @@ function tickParticles(dt) {
     if(p.life<=0)G.particles.splice(i,1);
   }
 }
- 
+
 // ── Drawing ────────────────────────────────────────────────────────────────
 function drawTable() {
   const{ox,oy,ow,oh,ix,iy,iw,ih,rail,pr}=T;
   const W=canvas.width, H=canvas.height;
- 
+
   // ── Outer wood frame: rich walnut with grain ──────────────────────────────
   // Base walnut colour
   const woodBase = ctx.createLinearGradient(0,0,W,H);
@@ -802,7 +950,7 @@ function drawTable() {
   woodBase.addColorStop(1,'#2e1505');
   ctx.fillStyle=woodBase;
   ctx.fillRect(0,0,W,H);
- 
+
   // Grain lines — subtle horizontal streaks
   ctx.save();
   ctx.globalAlpha=0.07;
@@ -816,7 +964,7 @@ function drawTable() {
     ctx.fillRect(0,y0,W,3+Math.sin(i)*2);
   }
   ctx.restore();
- 
+
   // Inner highlight/shadow bevel around frame edge
   ctx.save();
   // Top/left light edge
@@ -826,7 +974,7 @@ function drawTable() {
   ctx.strokeStyle='rgba(0,0,0,0.45)';ctx.lineWidth=2;
   ctx.beginPath();ctx.moveTo(W,0);ctx.lineTo(W,H);ctx.lineTo(0,H);ctx.stroke();
   ctx.restore();
- 
+
   // ── Cushion rail — darker walnut with inlay accent line ──────────────────
   const railGrad = ctx.createLinearGradient(ox,oy,ox+ow,oy+oh);
   railGrad.addColorStop(0,'#4a2208');
@@ -834,7 +982,7 @@ function drawTable() {
   railGrad.addColorStop(1,'#3a1a06');
   ctx.fillStyle=railGrad;
   ctx.fillRect(ox,oy,ow,oh);
- 
+
   // Rail bevel: inner shadow so rail looks 3-D inset
   const inset=2;
   ctx.save();
@@ -846,7 +994,7 @@ function drawTable() {
   ctx.strokeStyle='rgba(190,145,55,0.55)';ctx.lineWidth=1;
   ctx.strokeRect(ox+rail-3,oy+rail-3,ow-rail*2+6,oh-rail*2+6);
   ctx.restore();
- 
+
   // ── Pocket holes with leather lining ─────────────────────────────────────
   for(const p of T.pockets){
     // Outer leather ring
@@ -861,22 +1009,22 @@ function drawTable() {
     ctx.beginPath();ctx.arc(p.x,p.y,pr,0,Math.PI*2);
     ctx.strokeStyle='rgba(100,55,15,0.6)';ctx.lineWidth=1.5;ctx.stroke();
   }
- 
+
   // ── Felt playing surface ──────────────────────────────────────────────────
-  // Rich tournament green with slight vignette
+  const fc = FELT_COLORS[settings.felt] || FELT_COLORS.green;
   const fg=ctx.createRadialGradient(ix+iw/2,iy+ih/2,Math.min(iw,ih)*0.1, ix+iw/2,iy+ih/2,Math.max(iw,ih)*0.75);
-  fg.addColorStop(0,'#236b3a');
-  fg.addColorStop(0.6,'#1b5430');
-  fg.addColorStop(1,'#143d22');
+  fg.addColorStop(0, fc.c0);
+  fg.addColorStop(0.6, fc.c1);
+  fg.addColorStop(1, fc.c2);
   ctx.fillStyle=fg;ctx.fillRect(ix,iy,iw,ih);
- 
+
   // Felt nap texture: very faint diagonal hatching
   ctx.save();ctx.globalAlpha=0.018;ctx.strokeStyle='#ffffff';ctx.lineWidth=1;
   for(let d=-Math.max(iw,ih);d<Math.max(iw,ih)*2;d+=7){
     ctx.beginPath();ctx.moveTo(ix+d,iy);ctx.lineTo(ix+d+ih,iy+ih);ctx.stroke();
   }
   ctx.restore();
- 
+
   // ── Table markings ────────────────────────────────────────────────────────
   ctx.strokeStyle='rgba(255,255,255,.09)';ctx.lineWidth=1;
   if(T.isPortrait){
@@ -898,36 +1046,37 @@ function drawTable() {
       ctx.fillStyle='rgba(255,255,255,.18)';ctx.fill();
     });
   }
- 
+
   // Inner cushion shadow line
   ctx.strokeStyle='rgba(0,0,0,0.6)';ctx.lineWidth=3;
   ctx.strokeRect(ix,iy,iw,ih);
   ctx.strokeStyle='rgba(0,0,0,0.25)';ctx.lineWidth=1;
   ctx.strokeRect(ix+2,iy+2,iw-4,ih-4);
 }
- 
+
 // Single timer bar — uses the shortest remaining bomb timer.
 // Sits in the wood rail at the very top of the table frame (portrait)
 // or the very left edge (landscape), centred within the rail thickness.
 // Green >= 50%, Yellow < 50%, Red <= 25%.
 function drawTimerBar() {
+  if(!settings.timer) return;
   const alive = G.balls.filter(b=>!b.potted&&!b.exploded&&b.isBomb);
   if(!alive.length) return;
- 
+
   let minTimer = Infinity, maxTimer = 1;
   for(const b of alive){
     if(b.timer < minTimer){ minTimer=b.timer; maxTimer=b.maxTimer; }
   }
   const frac = Math.max(0, Math.min(1, minTimer/maxTimer));
   const col = frac<=0.25 ? '#ff2a2a' : frac<=0.50 ? '#ffaa00' : '#00e676';
- 
+
   // Bar lives in the rail (wood), not the felt.
   // Rail spans T.oy → T.iy (top) or T.ox → T.ix (left). Thickness = T.rail.
   const RAIL = T.rail;          // 14px rail thickness
   const H    = 4;               // bar height
   const PAD  = 5;               // horizontal padding inside rail
   const R    = 2;               // corner radius
- 
+
   if(T.isPortrait){
     // Centre bar vertically within the top rail
     const bx = T.ox + PAD;
@@ -959,13 +1108,166 @@ function drawTimerBar() {
     ctx.restore();
   }
 }
- 
+
+// Complementary accent colours per cue for pattern designs
+const CUE_ACCENTS = {
+  classic: { hi:'#ffe8a0', lo:'#3a1a06', pat:'#ffd060' },
+  white:   { hi:'#ffffff', lo:'#aaaaaa', pat:'#ddddff' },
+  black:   { hi:'#888888', lo:'#000000', pat:'#cc44ff' },
+  blue:    { hi:'#c8e8ff', lo:'#0a1f3a', pat:'#80cfff' },
+  red:     { hi:'#ffc8c8', lo:'#3a0808', pat:'#ff80aa' },
+  gold:    { hi:'#fff0a0', lo:'#5a3800', pat:'#ffe040' },
+};
+
+// Draw one flower centred at (fx, 0), sized to fit stick half-width hw
+function drawFlower(fx, hw) {
+  const PETALS = 6;
+  const pr  = hw * 1.1;   // petal orbit radius
+  const psr = hw * 0.85;  // petal circle radius
+  for (let p = 0; p < PETALS; p++) {
+    const pa = (p / PETALS) * Math.PI * 2;
+    ctx.beginPath();
+    ctx.arc(fx + Math.cos(pa)*pr, Math.sin(pa)*pr, psr, 0, Math.PI*2);
+    ctx.fill();
+  }
+  // Centre
+  ctx.beginPath(); ctx.arc(fx, 0, hw * 0.55, 0, Math.PI*2); ctx.fill();
+}
+
+// Draw a skull centred at (fx, 0), sized to fit stick half-width hw
+function drawSkull(fx, hw) {
+  const s = hw * 1.1; // scale factor
+  // Cranium
+  ctx.beginPath(); ctx.arc(fx, -s*0.25, s*1.0, 0, Math.PI*2); ctx.fill();
+  // Jaw — slightly lighter rectangle clipped below centre
+  ctx.save();
+  ctx.globalAlpha *= 0.7;
+  ctx.beginPath();
+  ctx.roundRect(fx - s*0.6, -s*0.2, s*1.2, s*0.75, [0,0,s*0.3,s*0.3]);
+  ctx.fill();
+  ctx.restore();
+  // Eye sockets (dark cut-outs using destination-out isn't possible in 2d,
+  // so draw dark circles on top)
+  const eyeAlpha = ctx.globalAlpha;
+  ctx.save();
+  ctx.globalCompositeOperation = 'destination-out';
+  ctx.globalAlpha = 0.65;
+  [-s*0.32, s*0.32].forEach(ex => {
+    ctx.beginPath(); ctx.arc(fx + ex, -s*0.38, s*0.28, 0, Math.PI*2); ctx.fill();
+  });
+  // Nose
+  ctx.beginPath(); ctx.arc(fx, -s*0.08, s*0.14, 0, Math.PI*2); ctx.fill();
+  // Teeth
+  for (let t = -1; t <= 1; t++) {
+    ctx.beginPath();
+    ctx.rect(fx + t*s*0.3 - s*0.1, s*0.28, s*0.2, s*0.32);
+    ctx.fill();
+  }
+  ctx.restore();
+}
+
+function drawCueStick(cx, cy, angle) {
+  const cc  = CUE_COLORS[settings.cue]   || CUE_COLORS.classic;
+  const acc = CUE_ACCENTS[settings.cue]  || CUE_ACCENTS.classic;
+
+  const TIP_GAP = BALL_R + 4;
+  const CUE_LEN = Math.min(canvas.width, canvas.height) * 0.82; // longer stick
+  const startX  = TIP_GAP;
+  const endX    = TIP_GAP + CUE_LEN;
+  const TIP_W   = 2, BUTT_W = 7; // slightly thicker for visible patterns
+
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.rotate(angle + Math.PI);
+
+  // ── Stick body ────────────────────────────────────────────────────────────
+  const cg = ctx.createLinearGradient(startX, 0, endX, 0);
+  cg.addColorStop(0,    cc.tip);
+  cg.addColorStop(0.35, cc.mid);
+  cg.addColorStop(1,    cc.butt);
+  ctx.beginPath();
+  ctx.moveTo(startX, -TIP_W);
+  ctx.lineTo(endX,   -BUTT_W);
+  ctx.lineTo(endX,    BUTT_W);
+  ctx.lineTo(startX,  TIP_W);
+  ctx.closePath();
+  ctx.fillStyle = cg; ctx.fill();
+
+  // ── Pattern designs ───────────────────────────────────────────────────────
+  // Both flowers and skulls use the same placement grid but different shapes.
+  // Patterns fill the decorative section of the stick (15%–85% of length).
+  // Pattern size scales with stick width at each position.
+  const hasPattern = settings.flowers || settings.skulls;
+  if (hasPattern) {
+    // Number of repeats scales with stick length
+    const REPEATS = 5;
+    const sectStart = startX + CUE_LEN * 0.12;
+    const sectEnd   = startX + CUE_LEN * 0.82;
+    const sectLen   = sectEnd - sectStart;
+    const spacing   = sectLen / REPEATS;
+
+    ctx.save();
+    // Clip drawing to the stick silhouette so nothing bleeds outside
+    ctx.beginPath();
+    ctx.moveTo(startX, -TIP_W);
+    ctx.lineTo(endX,   -BUTT_W);
+    ctx.lineTo(endX,    BUTT_W);
+    ctx.lineTo(startX,  TIP_W);
+    ctx.closePath();
+    ctx.clip();
+
+    ctx.fillStyle = acc.pat;
+    ctx.globalAlpha = 0.7;
+
+    for (let i = 0; i < REPEATS; i++) {
+      const fx  = sectStart + (i + 0.5) * spacing;
+      // Half-width of stick at this x position (linear interpolation)
+      const t   = (fx - startX) / CUE_LEN;
+      const hw  = TIP_W + (BUTT_W - TIP_W) * t;
+      const sz  = hw * 2.4; // generously sized pattern
+
+      if (settings.flowers) drawFlower(fx, sz);
+      else if (settings.skulls) drawSkull(fx, sz);
+    }
+    ctx.restore();
+
+    // Subtle shimmer ring separating each pattern
+    ctx.save();
+    ctx.globalAlpha = 0.18;
+    ctx.strokeStyle = acc.hi;
+    ctx.lineWidth = 1;
+    for (let i = 1; i < REPEATS; i++) {
+      const fx = sectStart + i * spacing;
+      const t  = (fx - startX) / CUE_LEN;
+      const hw = TIP_W + (BUTT_W - TIP_W) * t;
+      ctx.beginPath(); ctx.moveTo(fx, -hw); ctx.lineTo(fx, hw); ctx.stroke();
+    }
+    ctx.restore();
+  }
+
+  // ── Ferrule (silver band at tip) ─────────────────────────────────────────
+  ctx.fillStyle = 'rgba(220,220,220,0.8)';
+  ctx.fillRect(startX, -TIP_W, 7, TIP_W*2);
+
+  // ── Butt wrap (grip) ──────────────────────────────────────────────────────
+  ctx.fillStyle = 'rgba(0,0,0,0.35)';
+  ctx.fillRect(endX - CUE_LEN*0.2, -BUTT_W, CUE_LEN*0.18, BUTT_W*2);
+  // Thin accent line on grip
+  ctx.fillStyle = acc.hi;
+  ctx.globalAlpha = 0.5;
+  ctx.fillRect(endX - CUE_LEN*0.21, -BUTT_W, 2, BUTT_W*2);
+  ctx.fillRect(endX - CUE_LEN*0.02, -BUTT_W, 2, BUTT_W*2);
+
+  ctx.restore();
+}
+
 function drawAimLine() {
   if(G.phase!=='aiming'||!G.cue) return;
   const{x,y,r}=G.cue;
   const cos=Math.cos(G.aimAngle),sin=Math.sin(G.aimAngle);
   const hit=castRay(x,y,cos,sin,r);
   ctx.save();
+  // Aim trajectory line
   ctx.setLineDash([8,6]);ctx.strokeStyle='rgba(255,255,255,.2)';ctx.lineWidth=1.5;
   ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(hit.x,hit.y);ctx.stroke();
   if(hit.type==='ball'){
@@ -977,19 +1279,16 @@ function drawAimLine() {
     ctx.beginPath();ctx.moveTo(b.x,b.y);ctx.lineTo(b.x+nx*70,b.y+ny*70);ctx.stroke();
   }
   ctx.setLineDash([]);
-  ctx.translate(x,y);ctx.rotate(G.aimAngle+Math.PI);
-  const cg=ctx.createLinearGradient(14,0,100,0);
-  cg.addColorStop(0,'#f5d06e');cg.addColorStop(.4,'#c8a84b');cg.addColorStop(1,'#5c3317');
-  ctx.strokeStyle=cg;ctx.lineWidth=5;ctx.lineCap='round';
-  ctx.beginPath();ctx.moveTo(14,0);ctx.lineTo(100,0);ctx.stroke();
   ctx.restore();
+  // Draw the cue stick
+  drawCueStick(x, y, G.aimAngle);
 }
- 
+
 function lighten(hex,amt){
   const n=parseInt(hex.replace('#',''),16);
   return 'rgb('+Math.min(255,(n>>16)+amt)+','+Math.min(255,((n>>8)&255)+amt)+','+Math.min(255,(n&255)+amt)+')';
 }
- 
+
 function drawBalls() {
   const now=Date.now()/1000;
   for(const b of G.balls){
@@ -1014,7 +1313,7 @@ function drawBalls() {
     ctx.font='bold '+Math.round(b.r*0.82)+'px Share Tech Mono';
     ctx.textAlign='center';ctx.textBaseline='middle';
     ctx.fillText(b.id+1,b.x,b.y);
- 
+
   }
   // Cue ball
   if(G.cue){
@@ -1025,14 +1324,14 @@ function drawBalls() {
     ctx.strokeStyle='rgba(255,255,255,0.7)';ctx.lineWidth=1.5;ctx.stroke();
   }
 }
- 
+
 function drawParticles() {
   for(const p of G.particles){
     ctx.save();ctx.globalAlpha=p.life;ctx.fillStyle=p.color;
     ctx.beginPath();ctx.arc(p.x,p.y,p.r*p.life,0,Math.PI*2);ctx.fill();ctx.restore();
   }
 }
- 
+
 function drawSpinPad() {
   const c=sCtx,cx=30,cy=30,r=26;
   c.clearRect(0,0,60,60);
@@ -1048,7 +1347,7 @@ function drawSpinPad() {
   c.fillStyle='rgba(255,107,0,.9)';c.fill();
   c.strokeStyle='#000';c.lineWidth=1.5;c.stroke();
 }
- 
+
 function refreshStrip() {
   const strip=document.getElementById('bomb-strip');strip.innerHTML='';
   const alive=G.balls.filter(b=>!b.potted&&!b.exploded);
@@ -1067,7 +1366,7 @@ function refreshStrip() {
   }
   document.getElementById('s-left').textContent=alive.length;
 }
- 
+
 // ── Main loop ──────────────────────────────────────────────────────────────
 let lastTs=0;
 function loop(ts){
@@ -1085,7 +1384,7 @@ function loop(ts){
   drawSpinPad();
   requestAnimationFrame(loop);
 }
- 
+
 resizeCanvas();
 requestAnimationFrame(ts=>{lastTs=ts;requestAnimationFrame(loop);});
 </script>
